@@ -207,9 +207,8 @@ def train(data_dir, model_dir, args):
                     f"training loss {train_loss:4.4} || training accuracy {train_acc:4.2%} || lr {current_lr}"
                 )
                 wandb.log({
-                    "epochs": epoch,
-                    "acc": train_acc, 
-                    "loss": train_loss
+                    "train acc": train_acc, 
+                    "train loss": train_loss
                 })
                 # logger.add_scalar(
                 #     "Train/loss", train_loss, epoch * len(train_loader) + idx
@@ -277,11 +276,10 @@ def train(data_dir, model_dir, args):
             # logger.add_figure("results", figure, epoch)
             
             wandb.log({
-                "epochs": epoch,
-                "acc": val_acc, 
-                "loss": val_loss,
-                "best acc": best_val_acc,
-                "best loss": best_val_loss
+                "val acc": val_acc, 
+                "val loss": val_loss,
+                "best val acc": best_val_acc,
+                "best val loss": best_val_loss
             })
             print()
 
