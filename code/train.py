@@ -18,6 +18,19 @@ from torch.utils.tensorboard import SummaryWriter
 from dataset import MaskBaseDataset
 from loss import create_criterion
 
+import wandb
+
+def wandb_init(args):
+        
+    wandb.init(
+        # set the wandb project where this run will be logged
+        project="competition_1",
+        
+        # track hyperparameters and run metadata
+        config=args
+    )
+    wandb.run.name = f"RYAN_{args.model}_{args.epochs}_{args.lr}_{args.augmentation}"
+
 
 def seed_everything(seed):
     torch.manual_seed(seed)
@@ -159,6 +172,9 @@ def train(data_dir, model_dir, args):
     with open(os.path.join(save_dir, "config.json"), "w", encoding="utf-8") as f:
         json.dump(vars(args), f, ensure_ascii=False, indent=4)
 
+    wandb_init(args)
+
+
     best_val_acc = 0
     best_val_loss = np.inf
     for epoch in range(args.epochs):
@@ -190,12 +206,16 @@ def train(data_dir, model_dir, args):
                     f"Epoch[{epoch}/{args.epochs}]({idx + 1}/{len(train_loader)}) || "
                     f"training loss {train_loss:4.4} || training accuracy {train_acc:4.2%} || lr {current_lr}"
                 )
-                logger.add_scalar(
-                    "Train/loss", train_loss, epoch * len(train_loader) + idx
-                )
-                logger.add_scalar(
-                    "Train/accuracy", train_acc, epoch * len(train_loader) + idx
-                )
+                wandb.log({
+                    "train acc": train_acc, 
+                    "train loss": train_loss
+                })
+                # logger.add_scalar(
+                #     "Train/loss", train_loss, epoch * len(train_loader) + idx
+                # )
+                # logger.add_scalar(
+                #     "Train/accuracy", train_acc, epoch * len(train_loader) + idx
+                # )
 
                 loss_value = 0
                 matches = 0
@@ -251,9 +271,16 @@ def train(data_dir, model_dir, args):
                 f"[Val] acc : {val_acc:4.2%}, loss: {val_loss:4.2} || "
                 f"best acc : {best_val_acc:4.2%}, best loss: {best_val_loss:4.2}"
             )
-            logger.add_scalar("Val/loss", val_loss, epoch)
-            logger.add_scalar("Val/accuracy", val_acc, epoch)
-            logger.add_figure("results", figure, epoch)
+            # logger.add_scalar("Val/loss", val_loss, epoch)
+            # logger.add_scalar("Val/accuracy", val_acc, epoch)
+            # logger.add_figure("results", figure, epoch)
+            
+            wandb.log({
+                "val acc": val_acc, 
+                "val loss": val_loss,
+                "best val acc": best_val_acc,
+                "best val loss": best_val_loss
+            })
             print()
 
 
@@ -343,6 +370,9 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--model_dir", type=str, default=os.environ.get("SM_MODEL_DIR", "./model")
+    )
+    parser.add_argument(
+        "--wandb", type=bool, default=True, help="logging hyperparameters on wandb"
     )
 
     args = parser.parse_args()

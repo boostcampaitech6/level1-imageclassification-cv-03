@@ -29,7 +29,7 @@ def wandb_init(args):
         # track hyperparameters and run metadata
         config=args
     )
-    wandb.run.name = f"TY_{args.model}_{args.epochs}_{args.lr}_{args.augmentation}"
+    wandb.run.name = f"RYAN_{args.model}_{args.epochs}_{args.lr}_{args.augmentation}"
 
 
 def seed_everything(seed):
