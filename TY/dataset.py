@@ -17,6 +17,7 @@ from torchvision.transforms import (
     ColorJitter,
     RandomVerticalFlip,
     RandomHorizontalFlip,
+    RandAugment
 )
 from albumentations import (
     HorizontalFlip, IAAPerspective, ShiftScaleRotate, CLAHE, RandomRotate90,
@@ -99,7 +100,10 @@ class BaseAugmentation_for_prefetch:
     def __init__(self, resize, **args):
         self.transform = Compose(
             [
+                CenterCrop((320, 256)),
                 Resize(resize, Image.BILINEAR),
+                RandomHorizontalFlip(),
+                RandAugment(),
                 ToNumpy()
             ]
         )
