@@ -133,7 +133,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--batch_size",
         type=int,
-        default=1000,
+        default=256,
         help="input batch size for validing (default: 1000)",
     )
     parser.add_argument(
@@ -182,13 +182,21 @@ if __name__ == "__main__":
     out1_mask, out1_gender, out1_age = inference(data_dir, model_dir, output_dir, args)
 
     # inference_output(out1_mask, out1_gender, out1_age)
-    args.model='Swin_tiny'
-    out2_mask, out2_gender, out2_age = inference(data_dir, '/data/ephemeral/home/competition_1/model/exp55', output_dir, args)
-    args.model='Resnext50'
-    out3_mask, out3_gender, out3_age = inference(data_dir, '/data/ephemeral/home/competition_1/model/exp59', output_dir, args)
+    args.model='Conv2Model'
+    args.resize=(224, 224)
+    out2_mask, out2_gender, out2_age = inference(data_dir, '/data/ephemeral/home/competition_1/model/Conv2Model_scaler2', output_dir, args)
 
-    out_mask = np.stack([out1_mask, out2_mask, out3_mask], 1)
-    out_gender = np.stack([out1_gender, out2_gender, out3_gender], 1)
-    out_age = np.stack([out1_age, out2_age, out3_age], 1)
+    args.model='EvaModel'
+    args.resize=(448, 448)
+    args.batch_size=128
+    out3_mask, out3_gender, out3_age = inference(data_dir, '/data/ephemeral/home/competition_1/model/EvaModel_scaler', output_dir, args)
+
+    args.model='Swin_tiny_scaler2'
+    args.resize=(224, 224)
+    out4_mask, out4_gender, out4_age = inference(data_dir, '/data/ephemeral/home/competition_1/model/Swin_tiny_scaler2', output_dir, args)
+
+    out_mask = np.stack([out1_mask, out1_mask, out2_mask, out3_mask, out4_mask], 1)
+    out_gender = np.stack([out1_gender, out1_gender, out2_gender, out3_gender, out4_gender], 1)
+    out_age = np.stack([out1_age, out1_age, out2_age, out3_age, out4_age], 1)
 
     ensemble(out_mask,out_gender,out_age,output_dir)
