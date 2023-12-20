@@ -11,7 +11,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
-from torch.optim.lr_scheduler import StepLR
+from torch.optim.lr_scheduler import StepLR, ReduceLROnPlateau, CosineAnnealingLR
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 import torch.nn as nn
@@ -129,6 +129,7 @@ def soft_voting(mask_preds, gender_preds, age_preds):
 
 def train(data_dir, model_dir, args):
     seed_everything(args.seed)
+    torch.cuda.empty_cache()
 
     save_dir = increment_path(os.path.join(model_dir, args.name))
 
@@ -224,7 +225,8 @@ def train(data_dir, model_dir, args):
         lr=args.lr,
         weight_decay=1e-2,
     )
-    scheduler = StepLR(optimizer, args.lr_decay_step, gamma=0.5)
+    scheduler = CosineAnnealingLR(optimizer, T_max=50, eta_min=0)
+    # scheduler = StepLR(optimizer, args.lr_decay_step, gamma=0.5)
 
     scaler = torch.cuda.amp.GradScaler()
 
@@ -418,7 +420,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--valid_batch_size",
         type=int,
-        default=1000,
+        default=128,
         help="input batch size for validing (default: 1000)",
     )
     parser.add_argument(
