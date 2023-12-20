@@ -247,7 +247,7 @@ class Vit_tiny(nn.Module):
         )
         self.gender_fc = nn.Sequential(
             nn.ReLU(),
-            nn.Linear(1000, 3)
+            nn.Linear(1000, 2)
         )
         self.age_fc = nn.Sequential(
             nn.ReLU(),
@@ -274,7 +274,7 @@ class Swin_tiny(nn.Module):
         super().__init__()
         self.model = timm.models.create_model("swin_s3_tiny_224", pretrained=True, num_classes=64)
         self.mask_fc = nn.Linear(64, 3)
-        self.gender_fc = nn.Linear(64, 3)
+        self.gender_fc = nn.Linear(64, 2)
         self.age_fc = nn.Linear(64, 3)
 
         self.model = self.init_weights(self.model)
@@ -297,7 +297,7 @@ class Swinv2_tiny(nn.Module):
         super().__init__()
         self.model=timm.create_model("swinv2_cr_tiny_224", pretrained=False, num_classes=64)
         self.mask_fc = nn.Linear(64, 3)
-        self.gender_fc = nn.Linear(64, 3)
+        self.gender_fc = nn.Linear(64, 2)
         self.age_fc = nn.Linear(64, 3)
 
         self.model = self.init_weights(self.model)
@@ -325,7 +325,7 @@ class Resnext50(nn.Module):
             nn.LeakyReLU(0.2)
         )
         self.mask_fc = nn.Linear(64, 3)
-        self.gender_fc = nn.Linear(64, 3)
+        self.gender_fc = nn.Linear(64, 2)
         self.age_fc = nn.Linear(64, 3)
 
         self.model = self.init_weights(self.model)
@@ -358,7 +358,7 @@ class Swin3Model(nn.Module):
             param.requires_grad=True
 
         self.mask_fc = nn.Linear(64, 3)
-        self.gender_fc = nn.Linear(64, 3)
+        self.gender_fc = nn.Linear(64, 2)
         self.age_fc = nn.Linear(64, 3)      
 
     def forward(self, x):
@@ -378,7 +378,7 @@ class EvaModel(nn.Module):
             param.requires_grad=True
 
         self.mask_fc = nn.Linear(64, 3)
-        self.gender_fc = nn.Linear(64, 3)
+        self.gender_fc = nn.Linear(64, 2)
         self.age_fc = nn.Linear(64, 3)
 
     def forward(self, x):
@@ -400,7 +400,7 @@ class Conv2Model(nn.Module):
             param.requires_grad=True
             
         self.mask_fc = nn.Linear(64, 3)
-        self.gender_fc = nn.Linear(64, 3)
+        self.gender_fc = nn.Linear(64, 2)
         self.age_fc = nn.Linear(64, 3)
 
     def forward(self, x):
