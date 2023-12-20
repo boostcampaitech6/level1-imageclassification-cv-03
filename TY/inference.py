@@ -97,10 +97,11 @@ def inference(data_dir, model_dir, output_dir, args):
     return mask_preds, gender_preds, age_preds
 
 def inference_output(mask, gender, age):
-    
+
+    # 예측 결과를 데이터프레임에 저장하고 csv 파일로 출력한다.
     info = pd.read_csv('/data/ephemeral/home/competition_1/data/eval/info.csv')
     val = mask*6 + gender*3 + age
-    val = torch.argmax(val)
+    val = val.argmax(dim=-1)
 
     info["ans"] = val
     save_path = os.path.join(output_dir, f"ensemble.csv")
@@ -181,7 +182,6 @@ if __name__ == "__main__":
     out1_mask, out1_gender, out1_age = inference(data_dir, model_dir, output_dir, args)
 
     # inference_output(out1_mask, out1_gender, out1_age)
-    # 앙상블 수행, 동작 안하려면 아래 다 주석하면 됨
     args.model='Swin_tiny'
     out2_mask, out2_gender, out2_age = inference(data_dir, '/data/ephemeral/home/competition_1/model/exp55', output_dir, args)
     args.model='Resnext50'
