@@ -63,44 +63,45 @@
 
 # 2. 프로젝트 팀 구성 및 역할
 
-<img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EA%B9%80%EC%84%B8%EC%A7%84_%ED%94%84%EB%A1%9C%ED%95%84.png" width="200" height="200"/>
+<p align="left">
+    <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EA%B9%80%EC%84%B8%EC%A7%84_%ED%94%84%EB%A1%9C%ED%95%84.png" align="center" width="200" height="200">
+    <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EA%B9%80%EC%84%B8%EC%A7%84_%EA%B0%80%EC%83%81%ED%94%84%EB%A1%9C%ED%95%84.png" align="center" width="200" height="200">
+    <figcaption align="center">김세진_T6019: 데이터 전처리, EDA, 아이디어 제공</figcaption>
+</p>
 
-**김세진_T6019**
-
-데이터 전처리, EDA, 아이디어 제공
 
 - - -
 
-<img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EA%B9%80%ED%83%9C%EC%96%91_%ED%94%84%EB%A1%9C%ED%95%84.jpg" width="200" height="200"/>
-
-**김태양_T6044**
-
-모델 테스트, 튜닝, 오류 검출, 수정
-
-- - -
-
-<img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EB%B0%95%EC%A7%84%EC%98%81_%ED%94%84%EB%A1%9C%ED%95%84.jpg" width="200" height="200"/>
-
-**박진영_T6063**
-
-아이디어 제공, 모델 오류 및 검출
+<p align="left">
+    <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EA%B9%80%ED%83%9C%EC%96%91_%ED%94%84%EB%A1%9C%ED%95%84.jpg" align="center" width="200" height="200">
+    <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EA%B9%80%ED%83%9C%EC%96%91_%EA%B0%80%EC%83%81%ED%94%84%EB%A1%9C%ED%95%84.png" align="center" width="200" height="200">
+    <figcaption align="center">김태양_T6044: 모델 테스트, 튜닝, 오류 검출, 수정</figcaption>
+</p>
 
 - - -
 
-<img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EC%9D%B4%EC%84%A0%EC%9A%B0_%ED%94%84%EB%A1%9C%ED%95%84.jpeg" width="200" height="200"/>
-
-   **이선우_T6125**
-
-   모델 선정, 테스트, 튜닝
+<p align="left">
+    <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EB%B0%95%EC%A7%84%EC%98%81_%ED%94%84%EB%A1%9C%ED%95%84.jpg" align="center" width="200" height="200">
+    <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EB%B0%95%EC%A7%84%EC%98%81_%EA%B0%80%EC%83%81%ED%94%84%EB%A1%9C%ED%95%84.png" align="center" width="200" height="200">
+    <figcaption align="center">박진영_T6063: 아이디어 제공, 모델 오류 및 검출</figcaption>
+</p>
 
 - - -
 
-<img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EC%A7%84%EB%AF%BC%EC%A3%BC_%ED%94%84%EB%A1%9C%ED%95%84.png" width="200" height="200"/>
+<p align="left">
+    <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EC%9D%B4%EC%84%A0%EC%9A%B0_%ED%94%84%EB%A1%9C%ED%95%84.jpeg" align="center" width="200" height="200">
+    <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EC%9D%B4%EC%84%A0%EC%9A%B0_%EA%B0%80%EC%83%81%ED%94%84%EB%A1%9C%ED%95%84.png" align="center" width="200" height="200">
+    <figcaption align="center">이선우_T6125: 모델 선정, 테스트, 튜닝</figcaption>
+</p>
 
+- - -
 
-**진민주_T6171**
+<p align="left">
+    <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EC%A7%84%EB%AF%BC%EC%A3%BC_%ED%94%84%EB%A1%9C%ED%95%84.png" align="center" width="200" height="200">
+    <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EC%A7%84%EB%AF%BC%EC%A3%BC_%EA%B0%80%EC%83%81%ED%94%84%EB%A1%9C%ED%95%84.png" align="center" width="200" height="200">
+    <figcaption align="center">진민주_T6171: 데이터 전처리, EDA, 모델 선정</figcaption>
+</p>
 
-데이터 전처리, EDA, 모델 선정
 
 # 3. 프로젝트 수행 절차 및 방법
 
