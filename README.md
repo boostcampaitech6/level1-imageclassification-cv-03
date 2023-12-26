@@ -1,5 +1,11 @@
-training 코드
+**“마스크 착용 상태 분류”**
 
-python ./code/v2/train.py --data_dir /data/ephemeral/home/competition_1/data/train/images --model_dir /data/ephemeral/home/competition_1/model
+카메라로 촬영한 사람 얼굴 이미지의 **마스크 착용 여부, 성별, 연령**을 판단하는 Task
+**“Dataset”**
 
-wandb_init 함수에서 wandb.run_name() 수정하기
+- 전체 **4500명, 7개 사진**으로 구성
+    - id, race, gender, age
+    - mask 5개, incorrect 1개, normal 1개
+    - train/val dataset 60%
+    - public test dataset 20%
+    - private test dataset 20%
