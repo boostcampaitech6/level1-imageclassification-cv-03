@@ -6,14 +6,15 @@
 
 일정: 12월 11일(월) 10:00 ~ 12월 21일(목) 19:00
 
+
 **“Dataset”**
 
 - 전체 **4500명, 7개 사진**으로 구성
     - id, race, gender, age
     - mask 5개, incorrect 1개, normal 1개
 - Dataset 구분
-    
-     **Train/val dataset 60%                                                 public test dataset 20%   private test dataset 20%** 
+<img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/dataset_%EA%B5%AC%EB%B6%84.png" width="700" height="20"/>
+
     
 
 **“Class description”**
