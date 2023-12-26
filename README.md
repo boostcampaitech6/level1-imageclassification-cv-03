@@ -13,11 +13,13 @@
     - id, race, gender, age
     - mask 5개, incorrect 1개, normal 1개
 - Dataset 구분
-<img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/dataset_%EA%B5%AC%EB%B6%84.png" width="700" height="20"/>
+  
+    <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/dataset_%EA%B5%AC%EB%B6%84.png" width="700" height="20"/>
 
     
 
 **“Class description”**
+
 <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/class_description.png" width="500" height="500"/>
 
 **“Baseline code”**
@@ -50,7 +52,7 @@
     F_1 = 2\ *\ \frac{precision\ *\ recall}{precision\ +\ recall}
     $$
     
-        where:
+    where:
     
     $$
     precision=\frac{TP}{TP\ +\ FP}
@@ -67,7 +69,7 @@
 
 데이터 전처리, EDA, 아이디어 제공
 
----
+- - -
 
 <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EA%B9%80%ED%83%9C%EC%96%91_%ED%94%84%EB%A1%9C%ED%95%84.jpg" width="200" height="200"/>
 
@@ -75,7 +77,7 @@
 
 모델 테스트, 튜닝, 오류 검출, 수정
 
----
+- - -
 
 <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EB%B0%95%EC%A7%84%EC%98%81_%ED%94%84%EB%A1%9C%ED%95%84.jpg" width="200" height="200"/>
 
@@ -83,7 +85,7 @@
 
 아이디어 제공, 모델 오류 및 검출
 
----
+- - -
 
 <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EC%9D%B4%EC%84%A0%EC%9A%B0_%ED%94%84%EB%A1%9C%ED%95%84.jpeg" width="200" height="200"/>
 
@@ -91,7 +93,7 @@
 
    모델 선정, 테스트, 튜닝
 
----
+- - -
 
 <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EC%A7%84%EB%AF%BC%EC%A3%BC_%ED%94%84%EB%A1%9C%ED%95%84.png" width="200" height="200"/>
 
@@ -102,9 +104,9 @@
 
 ## 3. 프로젝트 수행 절차 및 방법
 
-<img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/timeline.png" width="700" height="500"/>
+<img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/timeline.png" width="600" height="400"/>
 
----
+- - -
 
 🔧 환경 구성
 
@@ -117,7 +119,7 @@ AI Stage에서 제공되는 서버를 사용했습니다.
 
 그리고 github와 wandb 연동, 필요한 라이브러리 설치했습니다.
 
----
+- - -
 
 🔍 EDA를 통한 데이터 분석 후 데이터 전처리
 
@@ -162,7 +164,7 @@ AI Stage에서 제공되는 서버를 사용했습니다.
     또한 Mask5번에 존재하는 긴 마스크의 데이터 양이 매우 적어서 같은 성별의 얼굴부분과 긴 마스크부분을 Custom Cutmix로 데이터 증강시켰습니다.
     
 
----
+- - -
 
 - 데이터 전처리
     - Augmentation
@@ -182,7 +184,7 @@ AI Stage에서 제공되는 서버를 사용했습니다.
         → 이외에도 다양하게 적용해보았습니다.
         
 
----
+- - -
 
 🔨 Baseline Code 변경
 
@@ -197,20 +199,20 @@ AI Stage에서 제공되는 서버를 사용했습니다.
         - **Soft Voting**
         - Hard Voting
 
----
+- - -
 
 📊 다양한 모델 테스트
 
 - ResNet18, ResNet50, DensNet121, EfficientNetV2-small, **Swin Transformer V2-tiny**, ConvNext-tiny, MobileNetV3-large, VIT - small, Swin Transformer V2 - large, Eva02 - large, **ConvNext - XXlarge**, VIT - large, **MetaFormer**, BeitV2 - large
 - 모든 파라미터를 얼리고 사용하는 것보다 끝 부분의 파라미터를 얼리지 않고 사용하는 편이 성능이 더 좋게 나왔습니다.
 
----
+- - -
 
 👫 개인 실험 및 모델 공유
 
 - 자신이 사용해본 모델, 추가해본 Augmentation, 하이퍼 파라미터 등을 공유하는 시간을 가졌습니다.
 
----
+- - -
 
 ⚙️ HyperParameter Tuning
 
@@ -222,7 +224,7 @@ Grid Search를 통해서 제일 좋은 결과가 나온 것을 사용했습니�
 - Learning Rate: 1e-3, **1e-4**, 1e-5, 1e-6
 - Criterion: CrossEntropy, **Focal loss**, F1_loss, Label_smoothing
 
----
+- - -
 
 ## 4. 프로젝트 수행 결과
 
@@ -318,7 +320,7 @@ Grid Search를 통해서 제일 좋은 결과가 나온 것을 사용했습니�
     - 문제를 해결할 때는 하나씩 차근차근 해봐야겠습니다.
     - Base코드에만 의존하지 않고, 직접 처음부터 구현도 해보고싶습니다.
 
----
+- - -
 
 - 김태양_T6044
     
@@ -347,7 +349,7 @@ Grid Search를 통해서 제일 좋은 결과가 나온 것을 사용했습니�
         - 우선 프로젝트를 바로 진행하는 것이 아닌 체계적인 프로젝트 관리를 위해 사용할 tools(github, wandb, gpu server 등)를 팀원들과 상의해서 명확하게 사용 방법을 공유하고 실천하는 것을 시도할 것입니다.
         - 또한, 데이터 전처리를 위한 EDA를 꼼꼼하게 진행하여 더 좋은 결과를 얻을 수 있도록 프로젝트에서 해결하고자 하는 목표를 뚜렷하게 할 계획입니다.
 
----
+- - -
 
 - 박진영_T6063
     
@@ -395,7 +397,7 @@ Grid Search를 통해서 제일 좋은 결과가 나온 것을 사용했습니�
     어떤 부분을 놓쳤는지, 어떤 부분을 개선해야 하는지, 지금껏 어떤 부분을 변경했고 왜 그랬는지 놓치지 않는 꼼꼼함과 사용한 이유를 명확히 밝힐 수 있는 확실함을 챙기는 것을 다음 프로젝트의 목표로 삼아야 겠다.
     
 
----
+- - -
 
 - 이선우_T6125
     - 나는 내 학습목표를 달성하기 위해 무엇을 어떻게 했는가?
@@ -409,7 +411,7 @@ Grid Search를 통해서 제일 좋은 결과가 나온 것을 사용했습니�
         - Stratified K-fold나 Random weighted sampler와 같은 전처리에도 공을 들여보고 싶다.
         - 코드가 보기 좋게 리팩토링 해보고 싶다.
 
----
+- - -
 
 - 진민주_T6171
     - 나는 내 학습목표를 달성하기 위해 무엇을 어떻게 했는가?
