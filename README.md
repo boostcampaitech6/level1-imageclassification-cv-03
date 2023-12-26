@@ -130,15 +130,10 @@ AI Stage에서 제공되는 서버를 사용했습니다.
     
     - image
         - 대부분의 이미지는 인물이 정중앙에 있다.
-            
-            <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D_image.png" width="500" height="300"/>
-            
+      
     - labelling
-        - 잘못된 라벨링이 있다.
-        
-            <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D_labelling.png" width="500" height="300"/>
-        
-    
+        - 잘못된 라벨링이 있다.        
+      
     - mask
         - 마스크 유무의 RGB가 다르다.
         
@@ -146,12 +141,14 @@ AI Stage에서 제공되는 서버를 사용했습니다.
         
         - Mask5번에 존재하는 스카프형 마스크의 데이터 양이 매우 적다.
         - 일반적인 마스크의 형태가 아닌 경우도 있다.
+      
     - age
         
         <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D_age.png" width="500" height="300"/>
         
         - 나이의 불균형이 심하다.
         - 60대가 적다.
+        
     - gender
         
         <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D_gender.png" width="500" height="300"/>
