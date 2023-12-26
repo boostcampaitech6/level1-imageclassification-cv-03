@@ -61,7 +61,7 @@
     $$
     
 
-## 2. 프로젝트 팀 구성 및 역할
+# 2. 프로젝트 팀 구성 및 역할
 
 <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EA%B9%80%EC%84%B8%EC%A7%84_%ED%94%84%EB%A1%9C%ED%95%84.png" width="200" height="200"/>
 
@@ -102,7 +102,7 @@
 
 데이터 전처리, EDA, 모델 선정
 
-## 3. 프로젝트 수행 절차 및 방법
+# 3. 프로젝트 수행 절차 및 방법
 
 <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/timeline.png" width="600" height="400"/>
 
@@ -226,7 +226,7 @@ Grid Search를 통해서 제일 좋은 결과가 나온 것을 사용했습니�
 
 - - -
 
-## 4. 프로젝트 수행 결과
+# 4. 프로젝트 수행 결과
 
 - wandb 그래프
     - MultilabelDataset 비교, Re-labeled dataset, baseAugmentation, Resize 224, center crop
@@ -270,11 +270,11 @@ Grid Search를 통해서 제일 좋은 결과가 나온 것을 사용했습니�
         - 대회 진행 중 제출한 모델들의 f1 score를 기준으로 최종 모델을 선정함
         - 또한, dataset가 제한적이라고 생각하여 tiny 모델을 앙상블한 결과와 large 모델을 앙상블한 결과 2가지를 최종 선정
     - 리더보드 캡쳐(대회 진행, 최종)
-    <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EB%A6%AC%EB%8D%94%EB%B3%B4%EB%93%9C.png" width="800" height="300"/>
+    <img src="https://github.com/boostcampaitech6/level1-imageclassification-cv-03/blob/main/readme_image/%EB%A6%AC%EB%8D%94%EB%B3%B4%EB%93%9C.png" width="700" height="100"/>
    
     
 
-## 5. 자체 평가 의견
+# 5. 자체 평가 의견
 
 - 회고
     - 잘한 점
@@ -293,7 +293,7 @@ Grid Search를 통해서 제일 좋은 결과가 나온 것을 사용했습니�
         - 가설 세우기, 계획적인 실험, 검증 과정들의 중요성을 느꼈다.
         - 분류 문제라고 분류에만 집착한게 아쉬웠다.
 
-## **개인 평가**
+# **개인 평가**
 
 - 김세진_T6019
     
