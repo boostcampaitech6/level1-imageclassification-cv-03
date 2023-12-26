@@ -17,7 +17,8 @@ from torch.utils.tensorboard import SummaryWriter
 import torch.nn as nn
 from dataset import MaskBaseDataset, BaseAugmentation_for_prefetch, fast_collate, PrefetchLoader
 from loss import create_criterion
-
+from lion_pytorch import Lion
+from adamp import AdamP
 import wandb
 from sklearn.metrics import f1_score
 
@@ -170,7 +171,7 @@ def train(data_dir, model_dir, args):
         num_workers=multiprocessing.cpu_count() // 2,
         shuffle=True,
         pin_memory=use_cuda,
-        drop_last=True,
+        drop_last=False,
         collate_fn=fast_collate
     )
     train_loader = PrefetchLoader(
@@ -185,7 +186,7 @@ def train(data_dir, model_dir, args):
         num_workers=multiprocessing.cpu_count() // 2,
         shuffle=False,
         pin_memory=use_cuda,
-        drop_last=True,
+        drop_last=False,
         collate_fn=fast_collate
     )
     val_loader = PrefetchLoader(
@@ -247,11 +248,12 @@ def train(data_dir, model_dir, args):
         loss_value = 0
         matches = 0
         for idx, train_batch in enumerate(train_loader):
+            # inputs, labels = train_batch
             inputs, mask_labels, gender_labels, age_labels = train_batch
-            # inputs = inputs.to(device)
-            # mask_labels = mask_labels.to(device)
-            # gender_labels = gender_labels.to(device)
-            # age_labels = age_labels.to(device)
+            inputs = inputs.to(device)
+            mask_labels = mask_labels.to(device)
+            gender_labels = gender_labels.to(device)
+            age_labels = age_labels.to(device)
 
             # model 1
             optimizer.zero_grad(set_to_none=True)
@@ -270,6 +272,12 @@ def train(data_dir, model_dir, args):
 
                 labels = mask_labels * 6 + gender_labels * 3 + age_labels
                 preds = mask_preds * 6 + gender_preds * 3 + age_preds
+
+            # with torch.cuda.amp.autocast():
+            #     outs = model(inputs)
+                
+            #     loss = criterion(outs,labels)
+            #     preds = torch.argmax(outs, dim=-1)
 
             scaler.scale(loss).backward()
             scaler.step(optimizer)
@@ -311,11 +319,12 @@ def train(data_dir, model_dir, args):
             val_acc_items = []
             figure = None
             for val_batch in val_loader:
+                # inputs, labels = val_batch
                 inputs, mask_labels, gender_labels, age_labels = val_batch
-                # inputs = inputs.to(device)
-                # mask_labels = mask_labels.to(device)
-                # gender_labels = gender_labels.to(device)
-                # age_labels = age_labels.to(device)
+                inputs = inputs.to(device)
+                mask_labels = mask_labels.to(device)
+                gender_labels = gender_labels.to(device)
+                age_labels = age_labels.to(device)
 
                 optimizer.zero_grad(set_to_none=True)
 
@@ -333,6 +342,11 @@ def train(data_dir, model_dir, args):
 
                     labels = mask_labels * 6 + gender_labels * 3 + age_labels
                     preds = mask_preds * 6 + gender_preds * 3 + age_preds
+                
+                # with torch.cuda.amp.autocast():
+                #     outs = model(inputs)
+                #     loss = criterion(outs, labels)
+                #     preds = torch.argmax(outs, dim=-1)
 
                 loss_item = loss.item()
                 acc_item = (labels == preds).sum().item()

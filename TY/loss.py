@@ -55,8 +55,10 @@ class F1Loss(nn.Module):
     def forward(self, y_pred, y_true):
         assert y_pred.ndim == 2
         assert y_true.ndim == 1
-        y_true = F.one_hot(y_true, self.classes).to(torch.float32)
+        y_true = F.one_hot(y_true, len(y_pred[1])).to(torch.float32)
         y_pred = F.softmax(y_pred, dim=1)
+
+        # print(f"y_true : {y_true.shape}, y_pred : {y_pred.shape}")
 
         tp = (y_true * y_pred).sum(dim=0).to(torch.float32)
         tn = ((1 - y_true) * (1 - y_pred)).sum(dim=0).to(torch.float32)

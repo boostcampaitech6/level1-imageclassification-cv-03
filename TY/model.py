@@ -215,8 +215,7 @@ class Convnext_tiny(nn.Module):
     # Note that these weights may change across versions
     def __init__(self, num_classes) -> None:
         super().__init__()
-        self.model = convnext_tiny(weights=ConvNeXt_Tiny_Weights.DEFAULT)
-        self.model.classifier.Linear = nn.Linear(1000, 64, bias=True)
+        self.model = timm.models.create_model("convnext_tiny.in12k_ft_in1k", pretrained=True, num_classes=64, drop_rate=0.1)
         
         self.mask_fc = nn.Linear(64, 3)
         self.gender_fc = nn.Linear(64, 2)
@@ -240,7 +239,7 @@ class Convnext_tiny(nn.Module):
 class Vit_tiny(nn.Module):
     def __init__(self, num_classes) -> None:
         super().__init__()
-        self.model = timm.models.vit_tiny_r_s16_p8_224(pretrained=True)
+        self.model = timm.models.vit_tiny_r_s16_p8_224(pretrained=True, drop_rate=0.1)
         self.mask_fc = nn.Sequential(
             nn.ReLU(),
             nn.Linear(1000, 3)
@@ -272,7 +271,7 @@ class Vit_tiny(nn.Module):
 class Swin_tiny(nn.Module):
     def __init__(self, num_classes) -> None:
         super().__init__()
-        self.model = timm.models.create_model("swin_s3_tiny_224", pretrained=True, num_classes=64)
+        self.model = timm.models.create_model("swin_s3_tiny_224", pretrained=True, num_classes=64, drop_rate=0.1)
         self.mask_fc = nn.Linear(64, 3)
         self.gender_fc = nn.Linear(64, 2)
         self.age_fc = nn.Linear(64, 3)
@@ -318,12 +317,7 @@ class Swinv2_tiny(nn.Module):
 class Resnext50(nn.Module):
     def __init__(self, num_classes) -> None:
         super().__init__()
-        self.model = resnext50_32x4d(pretrained=True)
-        self.fc_layer = nn.Sequential(
-            nn.LeakyReLU(0.2),
-            nn.Linear(1000, 64),
-            nn.LeakyReLU(0.2)
-        )
+        self.model = timm.create_model("resnext50_32x4d.a1h_in1k", pretrained=True, num_classes=64, drop_rate=0.1)
         self.mask_fc = nn.Linear(64, 3)
         self.gender_fc = nn.Linear(64, 2)
         self.age_fc = nn.Linear(64, 3)
@@ -338,7 +332,6 @@ class Resnext50(nn.Module):
 
     def forward(self, x):
         out = self.model(x)
-        out = self.fc_layer(out)
         mask = self.mask_fc(out)
         gender = self.gender_fc(out)
         age = self.age_fc(out)
@@ -409,3 +402,69 @@ class Conv2Model(nn.Module):
         gender = self.gender_fc(out)
         age = self.age_fc(out)
         return mask, gender, age    
+    
+class Resnet18_drop(nn.Module):
+    def __init__(self, num_classes):
+        super().__init__()
+        self.model = timm.create_model("resnet18.a1_in1k",pretrained=True,num_classes=64, drop_rate=0.1)
+            
+        self.mask_fc = nn.Linear(64, 3)
+        self.gender_fc = nn.Linear(64, 2)
+        self.age_fc = nn.Linear(64, 3)
+
+        self.model = self.init_weights(self.model)
+    
+    def init_weights(self, model):
+        for param in model.parameters():
+            param.requires_grad = True
+        
+        return model
+
+    def forward(self, x):
+        out = self.model(x)
+        mask = self.mask_fc(out)
+        gender = self.gender_fc(out)
+        age = self.age_fc(out)
+        return mask, gender, age    
+
+class Multi_model(nn.Module):
+    def __init__(self, num_classes):
+        super().__init__()
+        self.convnext = timm.models.create_model("convnext_tiny.in12k_ft_in1k", pretrained=True, num_classes=64, drop_rate=0.1)
+        self.resnext = timm.models.create_model("resnext50_32x4d.a1h_in1k", pretrained=True, num_classes=64, drop_rate=0.1)
+        self.swins3 = timm.models.create_model("swin_s3_tiny_224", pretrained=True, num_classes=64, drop_rate=0.1)
+
+        self.mask = nn.Sequential(
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Linear(64, 3)
+        )
+        self.gender = nn.Sequential(
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Linear(64, 2)
+        )
+        self.age = nn.Sequential(
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Linear(64, 3)
+        )
+
+        self.convnext = self.init_weights(self.convnext)
+        self.resnext = self.init_weights(self.resnext)
+        self.swins3 = self.init_weights(self.swins3)
+
+    def init_weights(self, model):
+        for param in model.parameters():
+            param.requires_grad = True
+        
+        return model
+
+    def forward(self, x):
+        mask = self.convnext(x)
+        mask = self.mask(mask)
+
+        gender = self.resnext(x)
+        gender = self.gender(gender)
+
+        age = self.swins3(x)
+        age = self.age(age)
+
+        return mask, gender, age

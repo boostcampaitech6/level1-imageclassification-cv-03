@@ -17,7 +17,8 @@ from torchvision.transforms import (
     ColorJitter,
     RandomVerticalFlip,
     RandomHorizontalFlip,
-    RandAugment
+    RandAugment,
+    RandomAdjustSharpness
 )
 from albumentations import (
     HorizontalFlip, IAAPerspective, ShiftScaleRotate, CLAHE, RandomRotate90,
@@ -103,8 +104,8 @@ class BaseAugmentation_for_prefetch:
                 CenterCrop((320, 256)),
                 Resize(resize, Image.BILINEAR),
                 RandomHorizontalFlip(),
-                RandAugment(),
-                ToNumpy()
+                # RandAugment(),
+                ToNumpy()   
             ]
         )
 
@@ -112,6 +113,14 @@ class BaseAugmentation_for_prefetch:
         return self.transform(image)
 
 def fast_collate(batch):
+    # targets = torch.tensor([b[1] for b in batch], dtype=torch.int64)
+
+    # batch_size = len(targets)
+    # tensor = torch.zeros((batch_size, *batch[0][0].shape), dtype=torch.uint8)
+    # for i in range(batch_size):
+    #     tensor[i] += torch.from_numpy(batch[i][0])
+
+        
     mask_targets = torch.tensor([b[1] for b in batch], dtype=torch.int64)
     gender_targets = torch.tensor([b[2] for b in batch], dtype=torch.int64)
     age_targets = torch.tensor([b[3] for b in batch], dtype=torch.int64)
@@ -134,6 +143,22 @@ class PrefetchLoader:
     def __iter__(self):
         stream = torch.cuda.Stream()
         first = True
+        # for next_input, next_target in self.loader:
+        #     with torch.cuda.stream(stream):
+        #         next_input = next_input.cuda(non_blocking=True)
+        #         next_target = next_target.cuda(non_blocking=True)
+        #         next_input = next_input.float().sub_(self.mean).div_(self.std)
+
+        #     if not first:
+        #         yield input, target
+        #     else:
+        #         first = False
+
+        #     torch.cuda.current_stream().wait_stream(stream)
+        #     input = next_input
+        #     target = next_target
+        # yield input, target
+
         for next_input, next_mask_target , next_gender_target , next_age_target in self.loader:
             with torch.cuda.stream(stream):
                 next_input = next_input.cuda(non_blocking=True)
@@ -542,6 +567,7 @@ class TestDataset(Dataset):
         self.img_paths = img_paths
         self.transform = Compose(
             [
+                CenterCrop((320, 256)),
                 Resize(resize, Image.BILINEAR),
                 ToTensor(),
                 Normalize(mean=mean, std=std),
