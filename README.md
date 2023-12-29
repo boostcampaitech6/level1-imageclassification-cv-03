@@ -428,3 +428,20 @@ Grid Search를 통해서 제일 좋은 결과가 나온 것을 사용했습니�
         - 데이터 전처리를 처음부터 했어야 했는데 체계적으로 접근하지 못한 것 같습니다. 그리고 데이터 불균형을 해결하기 위해 해볼 수 있는 아이디어가 많이 부족했습니다.
     - 한계/교훈을 바탕으로 다음 프로젝트에서 시도해보고 싶은 점은 무엇인가?
         - 22일에 스페셜 피어세션과 솔루션 발표를 통해서 데이터의 문제점을 어떻게 파악하고 데이터 불균형을 해결하기 위한 방법이 어떤 것이 있는지 많이 배웠습니다. 이외에도 공부가 많이 되었습니다. 아직 대회가 남았고 부스트캠프가 마지막이 아니니까 계속 공부하면서 다양한 솔루션을 얻고 많이 적용해보고 싶습니다.
+
+
+- - -
+- - -
+
+**“Operation code”**
+from main directory,
+
+when you operate training files,
+```
+python train.py --model multi_model --output_dir {where/you/want/} --data_dir {where/you/have/data/train/images}
+```
+
+when you operate inference files with your trained model,
+```
+python inference.py --model multi_model --model_dir {where/you/have/model} --data_dir {where/you/have/data/eval} --output_dir {where/you/want/} --name {what/do/you/want/save/csv_file_name}
+```
